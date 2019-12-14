@@ -8,7 +8,7 @@ package xmlfirmaelectronica;
 /**
  *
  * @author usuario
- */
+ *///
 public class Carreras extends javax.swing.JFrame {
 
     /**
