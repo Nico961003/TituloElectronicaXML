@@ -14,7 +14,7 @@ import java.sql.Statement;
 public class ConexionesDB {
     String conexion="jdbc:mariadb://localhost:3306/tituloProfesional";
     String userdb="root";
-    String passdb="Supervi$or123";
+    String passdb="sasa";
     Connection conn;
     PreparedStatement sentencia;
     public String probarConexion() throws ClassNotFoundException{
