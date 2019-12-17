@@ -15,7 +15,7 @@ public class XMLFirmaElectronica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Estudiantes().setVisible(true);
+        new Carreras().setVisible(true);
     }
     
 }
