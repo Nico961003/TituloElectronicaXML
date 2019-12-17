@@ -23,7 +23,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="882" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" pref="877" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -64,7 +68,7 @@
                                           </Group>
                                           <Component id="jLabel37" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="426" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="421" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -223,7 +227,7 @@
                                   </Group>
                                   <Component id="jLabel15" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="144" pref="184" max="32767" attributes="0"/>
+                              <EmptySpace min="144" pref="179" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -504,7 +508,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="jLabel10" alignment="0" pref="868" max="32767" attributes="0"/>
+                      <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -671,7 +675,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="747" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="742" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
