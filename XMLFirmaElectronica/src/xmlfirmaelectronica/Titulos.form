@@ -329,15 +329,10 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="ComboCarrera" min="-2" pref="232" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="DateFechaTermino" max="32767" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="ComboCarrera" pref="232" max="32767" attributes="0"/>
+                                                  <Component id="DateFechaTermino" max="32767" attributes="0"/>
                                               </Group>
+                                              <EmptySpace min="87" pref="87" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
@@ -348,7 +343,7 @@
                                                   <Component id="txtRvoe" pref="218" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Component id="DateFechaInicio" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="DateFechaInicio" min="-2" pref="232" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
