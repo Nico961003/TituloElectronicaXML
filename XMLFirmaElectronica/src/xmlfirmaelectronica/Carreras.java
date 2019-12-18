@@ -91,13 +91,13 @@ public class Carreras extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id de Carrera", "Clave de Carrera", "nombre de Carrera", "Fecha Inicio", "Fecha Termino", "Numero de RVOE"
+                "Clave de Carrera", "nombre de Carrera", "Fecha Inicio", "Fecha Termino", "Numero de RVOE"
             }
         ));
         jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -303,6 +303,8 @@ public class Carreras extends javax.swing.JFrame {
         // TODO add your handling code here:        
         capturarDatos();
         regitroBaseDatos();
+        dispose();
+        new Carreras().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseMoved
@@ -318,10 +320,10 @@ public class Carreras extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[6];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[5];//Crea un arreglo de objetos un objeto puede 
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 6; i++) {//El numero del for ebe ser igual al de la 
-                    valores[i] = resultadoConsulta.getObject(i + 1); //
+                for (int i = 0; i < 5; i++) {//El numero del for ebe ser igual al de la 
+                    valores[i] = resultadoConsulta.getObject(i + 2); //
                 }
                 modeloTabla.addRow(valores);//añade una nueva fila con los datos que 
                 //esten en cada psocion del arreglo de objetos
@@ -379,21 +381,20 @@ public class Carreras extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         fechaComoCadena = sdf.format(fecha1);
         
-        Date fecha2 = DateFechaInicio.getDate();
+        Date fecha2 = DateFechaTermino.getDate();
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         fechaComoCadena2 = sdf2.format(fecha2);
       
         
         autorizacionReconocimiento="prueba";
         
-         System.out.println("INSERT INTO Carrera(cveCarrera, nombreCarrera, fechaInicio, fechaTermino, numeroRvoe) VALUES ('" + clave + "','" + nombre
-                    + "','" + RVOE + "','" + fechaComoCadena +"','" + fechaComoCadena2 +"','"+ autorizacionReconocimiento + "'')");
-    }
+        }
 
     public void regitroBaseDatos() {
         try {
             String salida = conector.registrar("INSERT INTO Carrera(cveCarrera, nombreCarrera, fechaInicio, fechaTermino, numeroRvoe) VALUES ('" + clave + "','" + nombre
-                    + "','" + fechaComoCadena2  + "','" + fechaComoCadena +"','" + RVOE + "')");
+                    + "','" + fechaComoCadena  + "','" + fechaComoCadena2 +"','" + RVOE + "')");
+            System.out.println(salida);
             
             
         } catch (ClassNotFoundException ex) {
