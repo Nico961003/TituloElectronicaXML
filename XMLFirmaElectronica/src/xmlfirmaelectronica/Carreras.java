@@ -34,11 +34,9 @@ public class Carreras extends javax.swing.JFrame {
 
     int clave = 0;
     String nombreCarrera = "";
-    String fechaComoCadena = "";
-    String fechaComoCadena2 = "";
     String numeroRvoe = "";
-     int id_autorizacion=0;
-    String autorizacion_reconocimiento="";
+    int clave_autorizacion = 1;
+    String autorizacion_reconocimiento = "";
    
     
     public Carreras() {
@@ -78,7 +76,6 @@ public class Carreras extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton40 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -87,15 +84,12 @@ public class Carreras extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txtRvoe = new javax.swing.JTextField();
-        DateFechaInicio = new com.toedter.calendar.JDateChooser();
-        DateFechaTermino = new com.toedter.calendar.JDateChooser();
         ComboReconocimiento = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,13 +102,13 @@ public class Carreras extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Clave de Carrera", "nombre de Carrera", "Fecha Inicio", "Fecha Termino", "Numero de RVOE", "clave Autorizacion", "Autorizacion"
+                "Clave de Carrera", "nombre de Carrera", "Numero de RVOE", "clave Autorizacion", "Autorizacion"
             }
         ));
         jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -140,7 +134,7 @@ public class Carreras extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 222, Short.MAX_VALUE))
+                        .addGap(0, 210, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -167,25 +161,6 @@ public class Carreras extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Consultar Registro", jPanel2);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 821, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Otro dato", jPanel4);
-
-        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jPanel3MouseMoved(evt);
-            }
-        });
-
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel35.setText("EDITAR CARRERA ");
 
@@ -203,8 +178,6 @@ public class Carreras extends javax.swing.JFrame {
 
         jLabel13.setText("Autorización o Reconocimiento");
 
-        jLabel14.setText("Fecha Termino");
-
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,15 +187,7 @@ public class Carreras extends javax.swing.JFrame {
 
         jButton3.setText("Descartar");
 
-        jLabel16.setText("Fecha de Inicio");
-
         jLabel17.setText("Número de RVOE");
-
-        ComboReconocimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboReconocimientoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -256,16 +221,12 @@ public class Carreras extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel14))
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(178, Short.MAX_VALUE))
+                            .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,15 +245,7 @@ public class Carreras extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(DateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(DateFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(66, 66, 66)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -309,6 +262,19 @@ public class Carreras extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Editar Registro", jPanel3);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 820, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 459, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Otro dato", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,7 +282,7 @@ public class Carreras extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,10 +316,10 @@ public class Carreras extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[7];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[5];//Crea un arreglo de objetos un objeto puede 
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 7; i++) {//El numero del for ebe ser igual al de la 
-                    valores[i] = resultadoConsulta.getObject(i + 1); //
+                for (int i = 0; i < 5; i++) {//El numero del for ebe ser igual al de la 
+                    valores[i] = resultadoConsulta.getObject(i + 2); //
                 }
                 modeloTabla.addRow(valores);//añade una nueva fila con los datos que 
                 //esten en cada psocion del arreglo de objetos
@@ -362,28 +328,6 @@ public class Carreras extends javax.swing.JFrame {
             System.out.println("Error: " + ex);
         }
     }//GEN-LAST:event_jTable1MouseMoved
-
-    private void ComboReconocimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboReconocimientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboReconocimientoActionPerformed
-
-    private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-             
-        
-         try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT id_autorizacion FROM AutorizacionReconocimiento where autorizacion_reconocimiento ='"+ComboReconocimiento.getSelectedItem()+"'");//establecimiento de sentencia aejecutar
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (resultadoConsulta.next()) {
-                txtRvoe.setText(resultadoConsulta.getString("autorizacion_reconocimiento"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jPanel3MouseMoved
 
     private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
         // TODO add your handling code here:
@@ -431,28 +375,23 @@ public class Carreras extends javax.swing.JFrame {
         String variable = (String) txtClave.getText();
         clave = Integer.parseInt(variable);
         nombreCarrera = txtNombre.getText();
-   
-        
-        Date fecha1 = DateFechaInicio.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        fechaComoCadena = sdf.format(fecha1);
-        
-        Date fecha2 = DateFechaTermino.getDate();
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-        fechaComoCadena2 = sdf2.format(fecha2);
-         
+        autorizacion_reconocimiento =(String) ComboReconocimiento.getSelectedItem();
         numeroRvoe = txtRvoe.getText();
         
-        String variable2 = (String) txtRvoe.getText();
-        id_autorizacion = Integer.parseInt(variable2);
-        autorizacion_reconocimiento =(String) ComboReconocimiento.getSelectedItem();
-        
+         try { 
+             try {
+                resultadoConsulta = conector.consulta("SELECT clave_autorizacion FROM AutorizacionReconocimiento where autorizacion_reconocimiento='" + autorizacion_reconocimiento + "'");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) { Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);}
+            while (resultadoConsulta.next()) {        
+                clave_autorizacion=resultadoConsulta.getInt("clave_autorizacion");   
+            } } catch (SQLException ex) { Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex); }
+  
         }
 
     public void regitroBaseDatos() {
         try {
-            String salida = conector.registrar("INSERT INTO Carrera(cveCarrera, nombreCarrera, fechaInicio, fechaTermino, numeroRvoe, id_autorizacion, autorizacion_reconocimiento) VALUES ('" + clave + "','" + nombreCarrera
-                    + "','" + fechaComoCadena  + "','" + fechaComoCadena2 +"','" + numeroRvoe + "','" + id_autorizacion + "','" + autorizacion_reconocimiento + "')");
+            String salida = conector.registrar("INSERT INTO Carrera(cveCarrera, nombreCarrera, numeroRvoe, clave_autorizacion, autorizacion_reconocimiento) VALUES ('" + clave + "','" + nombreCarrera
+                    + "','"  + numeroRvoe + "','" + clave_autorizacion + "','" + autorizacion_reconocimiento + "')");
             System.out.println(salida);
             
             
@@ -464,16 +403,12 @@ public class Carreras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboReconocimiento;
-    private com.toedter.calendar.JDateChooser DateFechaInicio;
-    private com.toedter.calendar.JDateChooser DateFechaTermino;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton40;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel35;
