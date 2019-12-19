@@ -138,8 +138,8 @@
                         <Column editable="true" title="Fecha Inicio" type="java.lang.Object"/>
                         <Column editable="true" title="Fecha Termino" type="java.lang.Object"/>
                         <Column editable="true" title="Numero de RVOE" type="java.lang.Object"/>
-                        <Column editable="true" title="clave" type="java.lang.Object"/>
-                        <Column editable="true" title="reconocimiento" type="java.lang.Object"/>
+                        <Column editable="true" title="clave Autorizacion" type="java.lang.Object"/>
+                        <Column editable="true" title="Autorizacion" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -197,6 +197,28 @@
               </Properties>
             </Component>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Otro dato">
+                <Property name="tabTitle" type="java.lang.String" value="Otro dato"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="821" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="459" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Events>
@@ -257,10 +279,8 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtNombre" alignment="0" pref="222" max="32767" attributes="0"/>
                                   <Component id="txtClave" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="DateFechaTermino" alignment="0" pref="108" max="32767" attributes="0"/>
-                                      <Component id="DateFechaInicio" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="DateFechaTermino" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="DateFechaInicio" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -330,10 +350,13 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Clave"/>
+                <Property name="text" type="java.lang.String" value="Clave de Carrera"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtClave">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtClaveActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -400,28 +423,6 @@
               </AuxValues>
             </Component>
           </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel4">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Otro dato">
-                <Property name="tabTitle" type="java.lang.String" value="Otro dato"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="821" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="459" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
         </Container>
       </SubComponents>
     </Container>

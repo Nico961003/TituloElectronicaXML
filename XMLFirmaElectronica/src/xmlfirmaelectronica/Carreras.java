@@ -33,12 +33,13 @@ public class Carreras extends javax.swing.JFrame {
     DefaultTableModel modeloTabla;
 
     int clave = 0;
-    String nombre = "";
-    String RVOE = "", autorizacionReconocimiento = "";
+    String nombreCarrera = "";
     String fechaComoCadena = "";
     String fechaComoCadena2 = "";
-    String reconocimiento="";
-    int id=0;
+    String numeroRvoe = "";
+     int id_autorizacion=0;
+    String autorizacion_reconocimiento="";
+   
     
     public Carreras() {
         initComponents();
@@ -47,13 +48,13 @@ public class Carreras extends javax.swing.JFrame {
         
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM reconocimiento");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT * FROM AutorizacionReconocimiento");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
-                ComboReconocimiento.addItem(resultadoConsulta.getString("reconocimiento"));
+                ComboReconocimiento.addItem(resultadoConsulta.getString("autorizacion_reconocimiento"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,6 +78,7 @@ public class Carreras extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton40 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -94,7 +96,6 @@ public class Carreras extends javax.swing.JFrame {
         DateFechaInicio = new com.toedter.calendar.JDateChooser();
         DateFechaTermino = new com.toedter.calendar.JDateChooser();
         ComboReconocimiento = new javax.swing.JComboBox<>();
-        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,7 +114,7 @@ public class Carreras extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Clave de Carrera", "nombre de Carrera", "Fecha Inicio", "Fecha Termino", "Numero de RVOE", "clave", "reconocimiento"
+                "Clave de Carrera", "nombre de Carrera", "Fecha Inicio", "Fecha Termino", "Numero de RVOE", "clave Autorizacion", "Autorizacion"
             }
         ));
         jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -166,6 +167,19 @@ public class Carreras extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Consultar Registro", jPanel2);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 821, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 459, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Otro dato", jPanel4);
+
         jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jPanel3MouseMoved(evt);
@@ -175,7 +189,13 @@ public class Carreras extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel35.setText("EDITAR CARRERA ");
 
-        jLabel1.setText("Clave");
+        jLabel1.setText("Clave de Carrera");
+
+        txtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nombre de Carrera");
 
@@ -243,9 +263,8 @@ public class Carreras extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                             .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(178, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -289,19 +308,6 @@ public class Carreras extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Editar Registro", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 821, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Otro dato", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -347,7 +353,7 @@ public class Carreras extends javax.swing.JFrame {
             Object[] valores = new Object[7];//Crea un arreglo de objetos un objeto puede 
             while (resultadoConsulta.next()) {
                 for (int i = 0; i < 7; i++) {//El numero del for ebe ser igual al de la 
-                    valores[i] = resultadoConsulta.getObject(i + 2); //
+                    valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
                 modeloTabla.addRow(valores);//añade una nueva fila con los datos que 
                 //esten en cada psocion del arreglo de objetos
@@ -366,18 +372,22 @@ public class Carreras extends javax.swing.JFrame {
         
          try {
             try {
-                resultadoConsulta = conector.consulta("SELECT clave FROM reconocimiento where reconocimiento ='"+ComboReconocimiento.getSelectedItem()+"'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT id_autorizacion FROM AutorizacionReconocimiento where autorizacion_reconocimiento ='"+ComboReconocimiento.getSelectedItem()+"'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
-                txtRvoe.setText(resultadoConsulta.getString("clave"));
+                txtRvoe.setText(resultadoConsulta.getString("autorizacion_reconocimiento"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jPanel3MouseMoved
+
+    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveActionPerformed
 
 
     /**
@@ -420,8 +430,8 @@ public class Carreras extends javax.swing.JFrame {
     {
         String variable = (String) txtClave.getText();
         clave = Integer.parseInt(variable);
-        nombre = txtNombre.getText();
-        RVOE = txtRvoe.getText();
+        nombreCarrera = txtNombre.getText();
+   
         
         Date fecha1 = DateFechaInicio.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -430,17 +440,19 @@ public class Carreras extends javax.swing.JFrame {
         Date fecha2 = DateFechaTermino.getDate();
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         fechaComoCadena2 = sdf2.format(fecha2);
-      
+         
+        numeroRvoe = txtRvoe.getText();
+        
         String variable2 = (String) txtRvoe.getText();
-        id = Integer.parseInt(variable2);
-        reconocimiento =(String) ComboReconocimiento.getSelectedItem();
+        id_autorizacion = Integer.parseInt(variable2);
+        autorizacion_reconocimiento =(String) ComboReconocimiento.getSelectedItem();
         
         }
 
     public void regitroBaseDatos() {
         try {
-            String salida = conector.registrar("INSERT INTO Carrera(cveCarrera, nombreCarrera, fechaInicio, fechaTermino, numeroRvoe, id, reconocimiento) VALUES ('" + clave + "','" + nombre
-                    + "','" + fechaComoCadena  + "','" + fechaComoCadena2 +"','" + RVOE + "','" + id + "','" + reconocimiento + "')");
+            String salida = conector.registrar("INSERT INTO Carrera(cveCarrera, nombreCarrera, fechaInicio, fechaTermino, numeroRvoe, id_autorizacion, autorizacion_reconocimiento) VALUES ('" + clave + "','" + nombreCarrera
+                    + "','" + fechaComoCadena  + "','" + fechaComoCadena2 +"','" + numeroRvoe + "','" + id_autorizacion + "','" + autorizacion_reconocimiento + "')");
             System.out.println(salida);
             
             
