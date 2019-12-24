@@ -818,7 +818,7 @@ public class Carreras extends javax.swing.JFrame {
 
         try {
             String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
-            String contenido = "||1.0|FOLIOCONTROL|" + curpResponsable + "|1|Director|LIC.|" + curpResponsable + "3|Rector|ING."
+            String contenido = "||1.0|FOLIOCONTROL|" + curpResponsable + "|1|Director|LIC.|" + curpResponsable + "|3|Rector|ING."
                     + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaComoCadena + "|"
                     + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "||" + CURP + "|"
                     + nombre + "|" + aPaterno+ "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
