@@ -61,7 +61,7 @@ public class Carreras extends javax.swing.JFrame {
     String fechaComoCadena = "", institucionProcedencia = "";
     String fechaComoCadena2 = "", tipodeEstudio = "", eFederativa = "";
     int idModalidadTitulacion = 0, idFundamentoLegalServicioSocial = 0;
-    String idEntidadFederativa1 = "";
+    String idEntidadFederativa1 = "", noCedula= "", noRvoe= "";
 
     /**
      * *****************************************
@@ -186,7 +186,19 @@ public class Carreras extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
                 } 
             }
-        });      
+        });   
+        
+        txtNoCedula.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                } 
+            }
+        });  
 
     }
 
@@ -244,11 +256,12 @@ public class Carreras extends javax.swing.JFrame {
         DateFechaInicioE = new com.toedter.calendar.JDateChooser();
         jLabel19 = new javax.swing.JLabel();
         DateFechaTerminoE = new com.toedter.calendar.JDateChooser();
+        jLabel28 = new javax.swing.JLabel();
+        txtNoCedula = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNombreCarrera = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -258,6 +271,7 @@ public class Carreras extends javax.swing.JFrame {
         DateFechaTermino = new com.toedter.calendar.JDateChooser();
         btnGenerar = new javax.swing.JButton();
         ComboClave = new javax.swing.JComboBox<>();
+        txtNombreCarrera = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -314,7 +328,7 @@ public class Carreras extends javax.swing.JFrame {
                             .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,6 +413,8 @@ public class Carreras extends javax.swing.JFrame {
 
         jLabel19.setText("Fecha termino");
 
+        jLabel28.setText("no. Cedula");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -432,10 +448,14 @@ public class Carreras extends javax.swing.JFrame {
                                                     .addGap(150, 150, 150)
                                                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addComponent(DateFechaInicioE, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(txtNoCedula, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))))))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel18)
-                                    .addComponent(jLabel19)))))
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel28)
+                                        .addComponent(jLabel19))))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel37))
@@ -471,7 +491,7 @@ public class Carreras extends javax.swing.JFrame {
                                     .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel8))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,11 +545,16 @@ public class Carreras extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel19)
-                        .addGap(60, 60, 60)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel28)
+                        .addGap(33, 33, 33)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4)
                             .addComponent(jButton5)))
-                    .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -580,11 +605,6 @@ public class Carreras extends javax.swing.JFrame {
                             .addComponent(jLabel35)
                             .addComponent(jLabel5)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17)
-                        .addGap(6, 6, 6)
-                        .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -593,11 +613,16 @@ public class Carreras extends javax.swing.JFrame {
                             .addComponent(jLabel13))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(414, Short.MAX_VALUE))
+                            .addComponent(ComboClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel17)
+                        .addGap(13, 13, 13)
+                        .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(411, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -620,8 +645,8 @@ public class Carreras extends javax.swing.JFrame {
                                 .addComponent(ComboClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
@@ -646,7 +671,7 @@ public class Carreras extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,15 +696,13 @@ public class Carreras extends javax.swing.JFrame {
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         capturarDatos();
         regitroBaseDatos();
-        dispose();
-        new Carreras().setVisible(true);
         abrirarchivo("/home/genaro/Documentos/");
         temporal tm = new temporal();
         System.out.println("prueba de envio : " + contenido);
         tm.setTexto(contenido.trim());
         final MECSignerClient client = new MECSignerClient();
         client.setVisible(true);
-
+        dispose();
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void txtFolioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFolioMouseMoved
@@ -705,10 +728,10 @@ public class Carreras extends javax.swing.JFrame {
             btnGenerar.setEnabled(false);
         }
         
-        if(txtNombreCarrera.getText() == "" ||DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null
+        if(DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null
         || txtMatricula.getText() == "" || txtNombre.getText() == "" || txtaPaterno.getText() == "" || txtaMaterno.getText() == ""
         || txtCURP.getText() == "" || txtCorreo.getText() == "" || txtFolio.getText() == "" || DateExpedicion.getDate() == null
-        || txtProcedencia.getText() == "" || DateExpedicion.getDate() == null){
+        || txtProcedencia.getText() == "" || DateExpedicion.getDate() == null || txtNoCedula.getText() == ""){
           
             JOptionPane.showMessageDialog(null, "Tiene que llenar todos los datos para poder continuar\nFinalice y vuelva a intentar");
             btnGenerar.setEnabled(false);
@@ -719,15 +742,15 @@ public class Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-   
     try {
             try {
-                resultadoConsulta = conector.consulta("SELECT Carrera FROM Carreras where idCarrera='" + (String) ComboClave.getSelectedItem() + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT * FROM Carreras where idCarrera='" + (String) ComboClave.getSelectedItem() + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
                 txtNombreCarrera.setText(resultadoConsulta.getString("Carrera")); 
+                noRvoe = resultadoConsulta.getString("noRvoe"); 
             }
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
@@ -847,6 +870,7 @@ public class Carreras extends javax.swing.JFrame {
         Date fecha6 = DateExpedicion.getDate();
         SimpleDateFormat sdf6 = new SimpleDateFormat("yyyy-MM-dd");
         fechaTerminoAntecedente = sdf6.format(fecha6);
+        noCedula = txtNoCedula.getText();
     }
 
     public void capturarDatos() {
@@ -945,12 +969,12 @@ public class Carreras extends javax.swing.JFrame {
             String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
             contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                     + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaComoCadena + "|"
-                    + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "||" + CURP + "|"
+                    + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento +  "|" + noRvoe + "||" + CURP + "|"
                     + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                     + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                     + fundamentoSS + "|" + idEntidadFederativa1 + "|" + eFederativa + "|"
                     + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
-                    + idEntidadFederativa1 + "|" + eFederativa + "|" + fechaComoCadena + "|" + fechaComoCadena2 + "|||";
+                    + idEntidadFederativa1 + "|" + eFederativa + "|" + fechaComoCadena + "|" + fechaComoCadena2 + "|" + noCedula + "|||";
 
             System.out.println(contenido);
 
@@ -1006,6 +1030,7 @@ public class Carreras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
@@ -1025,6 +1050,7 @@ public class Carreras extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtFolio;
     private javax.swing.JTextField txtMatricula;
+    private javax.swing.JTextField txtNoCedula;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreCarrera;
     private javax.swing.JTextField txtProcedencia;
