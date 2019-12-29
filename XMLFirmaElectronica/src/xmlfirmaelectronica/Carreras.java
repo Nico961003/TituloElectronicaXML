@@ -6,9 +6,13 @@ package xmlfirmaelectronica;
  * and open the template in the editor.
  */
 import CodeHelpers.ConexionesDB;
+import java.awt.Desktop;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,6 +30,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*import java.sql.Date;*/
 public class Carreras extends javax.swing.JFrame {
@@ -34,12 +40,13 @@ public class Carreras extends javax.swing.JFrame {
     ResultSet resultadoConsulta;
     DefaultTableModel modeloTabla;
 
+    String contenido = "";
     String curpResponsable = "";
     int idCargo = 0;
     String cargo = "";
     String abrTitulo = "";
 
-    int clave = 0;
+    String clave = "";
     String nombreCarrera = "";
     String numeroRvoe = "";
     int clave_autorizacion = 0;
@@ -54,13 +61,13 @@ public class Carreras extends javax.swing.JFrame {
     String fechaComoCadena = "", institucionProcedencia = "";
     String fechaComoCadena2 = "", tipodeEstudio = "", eFederativa = "";
     int idModalidadTitulacion = 0, idFundamentoLegalServicioSocial = 0;
-    int idEntidadFederativa1 = 0, idEntidadFederativa2 = 0;
+    String idEntidadFederativa1 = "";
 
     /**
      * *****************************************
      */
     String fechaExpedicion = "", modalidadTitulacion = "", fundamentoSS = "";
-    String fechaExamen = "", eFederativa2 = "", folioControl = "";
+    String fechaExamen = "", folioControl = "";
     int sSocial = 0;
 
     int idTipoEstudioAntecedente = 0;
@@ -69,77 +76,118 @@ public class Carreras extends javax.swing.JFrame {
     public Carreras() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+   
+        txtNombreCarrera.setEnabled(false);
+        
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM AutorizacionReconocimiento");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT * FROM autorizacionRec");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
-                ComboReconocimiento.addItem(resultadoConsulta.getString("autorizacion_reconocimiento"));
+                ComboReconocimiento.addItem(resultadoConsulta.getString("AUTORIZACIÓN_RECONOCIMIENTO"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM entidadFederativa");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
                 ComboEFederativa.addItem(resultadoConsulta.getString("nombreEntidad"));
-                ComboEFederativa2.addItem(resultadoConsulta.getString("nombreEntidad"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM estudioAntecedente");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
                 ComboTipoEstudio.addItem(resultadoConsulta.getString("tipoEstudioAntecedente"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM modalidadTitulacion");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
                 ComboModalidadT.addItem(resultadoConsulta.getString("MODALIDAD_TITULACIÓN"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM fundamentoSSocial");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             while (resultadoConsulta.next()) {
                 ComboFLegal.addItem(resultadoConsulta.getString("FUNDAMENTO_LEGAL_SERVICIO_SOCIAL"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT * FROM Carreras");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                ComboClave.addItem(resultadoConsulta.getString("IdCarrera"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+        txtFolio.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                } 
+            }
+        });
+        
+        txtMatricula.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                } 
+            }
+        });      
+
     }
 
     /**
@@ -163,11 +211,10 @@ public class Carreras extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         ComboModalidadT = new javax.swing.JComboBox<>();
         DateExamenP = new com.toedter.calendar.JDateChooser();
-        jLabel25 = new javax.swing.JLabel();
         ComboFLegal = new javax.swing.JComboBox<>();
-        ComboEFederativa2 = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
         txtFolio = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -200,7 +247,6 @@ public class Carreras extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtClave = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtNombreCarrera = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -210,7 +256,8 @@ public class Carreras extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         DateFechaInicio = new com.toedter.calendar.JDateChooser();
         DateFechaTermino = new com.toedter.calendar.JDateChooser();
-        jButton41 = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
+        ComboClave = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -229,9 +276,15 @@ public class Carreras extends javax.swing.JFrame {
 
         jLabel24.setText("cumplioServicioSocial");
 
-        jLabel25.setText("Entidad Federativa");
-
         jLabel26.setText("Folio de control");
+
+        txtFolio.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtFolioMouseMoved(evt);
+            }
+        });
+
+        jLabel25.setText("o fecha de excención");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -251,18 +304,17 @@ public class Carreras extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26))
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel25))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboEFederativa2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboModalidadT, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,6 +328,9 @@ public class Carreras extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel20)
                             .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -283,10 +338,11 @@ public class Carreras extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22)
                             .addComponent(ComboModalidadT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel23))
-                    .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel25)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
@@ -294,11 +350,7 @@ public class Carreras extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboEFederativa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Expedición", jPanel2);
@@ -419,7 +471,7 @@ public class Carreras extends javax.swing.JFrame {
                                     .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel8))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,16 +535,16 @@ public class Carreras extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Estudiante", jPanel5);
 
+        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel3MouseMoved(evt);
+            }
+        });
+
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel35.setText("Carrera ");
 
         jLabel1.setText("Clave de Carrera");
-
-        txtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClaveActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Nombre de Carrera");
 
@@ -504,10 +556,15 @@ public class Carreras extends javax.swing.JFrame {
 
         jLabel14.setText("Fecha de inicio");
 
-        jButton41.setText("Generar");
-        jButton41.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setText("Generar");
+        btnGenerar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseMoved(evt);
+            }
+        });
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton41ActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
 
@@ -535,15 +592,15 @@ public class Carreras extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel13))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(390, Short.MAX_VALUE))
+                            .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(414, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
@@ -559,8 +616,8 @@ public class Carreras extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(39, 39, 39))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)))
+                                .addComponent(jLabel1)
+                                .addComponent(ComboClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -577,7 +634,7 @@ public class Carreras extends javax.swing.JFrame {
                     .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(jButton41)
+                .addComponent(btnGenerar)
                 .addContainerGap())
         );
 
@@ -602,10 +659,6 @@ public class Carreras extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveActionPerformed
-
     private void ComboTipoEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTipoEstudioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboTipoEstudioActionPerformed
@@ -615,12 +668,76 @@ public class Carreras extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         capturarDatos();
         regitroBaseDatos();
         dispose();
         new Carreras().setVisible(true);
-    }//GEN-LAST:event_jButton41ActionPerformed
+        abrirarchivo("/home/genaro/Documentos/");
+        temporal tm = new temporal();
+        System.out.println("prueba de envio : " + contenido);
+        tm.setTexto(contenido.trim());
+        final MECSignerClient client = new MECSignerClient();
+        client.setVisible(true);
+
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void txtFolioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFolioMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFolioMouseMoved
+
+    private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
+            // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+ 
+        // El email a validar
+        String email = txtCorreo.getText();
+ 
+        Matcher mather = pattern.matcher(email);
+ 
+        if (mather.find() == true) {
+            btnGenerar.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "El email ingresado es inválido\nCorrija y vuelva a intentar");
+            txtCorreo.setText("");
+            btnGenerar.setEnabled(false);
+        }
+        
+        if(txtNombreCarrera.getText() == "" ||DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null
+        || txtMatricula.getText() == "" || txtNombre.getText() == "" || txtaPaterno.getText() == "" || txtaMaterno.getText() == ""
+        || txtCURP.getText() == "" || txtCorreo.getText() == "" || txtFolio.getText() == "" || DateExpedicion.getDate() == null
+        || txtProcedencia.getText() == "" || DateExpedicion.getDate() == null){
+          
+            JOptionPane.showMessageDialog(null, "Tiene que llenar todos los datos para poder continuar\nFinalice y vuelva a intentar");
+            btnGenerar.setEnabled(false);
+            
+        }
+        
+        
+    }//GEN-LAST:event_btnGenerarMouseMoved
+
+    private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
+   
+    try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT Carrera FROM Carreras where idCarrera='" + (String) ComboClave.getSelectedItem() + "'");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                txtNombreCarrera.setText(resultadoConsulta.getString("Carrera")); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jPanel3MouseMoved
+    public void sacartexto() {
+        System.out.println("Envio");
+        temporal tm = new temporal();
+        System.out.println(tm.getTexto());
+    }
 
     /**
      * @param args the command line arguments
@@ -664,10 +781,19 @@ public class Carreras extends javax.swing.JFrame {
         });
     }
 
+    public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
     public void datosResponsables() {
-        String variable = (String) txtClave.getText();
-        clave = Integer.parseInt(variable);
+        clave = (String) ComboClave.getSelectedItem();
         nombreCarrera = txtNombreCarrera.getText();
+        nombreCarrera = nombreCarrera.toUpperCase();
         autorizacion_reconocimiento = (String) ComboReconocimiento.getSelectedItem();
         Date fecha1 = DateFechaInicio.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -680,9 +806,13 @@ public class Carreras extends javax.swing.JFrame {
     public void datosAlumno() {
         matricula = txtMatricula.getText();
         nombre = txtNombre.getText();
+        nombre = nombre.toUpperCase();
         aPaterno = txtaPaterno.getText();
+        aPaterno = aPaterno.toUpperCase();
         aMaterno = txtaMaterno.getText();
+        aMaterno = aMaterno.toUpperCase();
         CURP = txtCURP.getText();
+        CURP = CURP.toUpperCase();
         correo = txtCorreo.getText();
     }
 
@@ -700,7 +830,6 @@ public class Carreras extends javax.swing.JFrame {
         }
 
         fundamentoSS = (String) ComboFLegal.getSelectedItem();
-        eFederativa2 = (String) ComboEFederativa2.getSelectedItem();
         Date fecha3 = DateExpedicion.getDate();
         SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
         fechaExpedicion = sdf3.format(fecha3);
@@ -709,6 +838,7 @@ public class Carreras extends javax.swing.JFrame {
 
     public void datosAntecedentes() {
         institucionProcedencia = txtProcedencia.getText();
+        institucionProcedencia = institucionProcedencia.toUpperCase();
         tipodeEstudio = (String) ComboTipoEstudio.getSelectedItem();
         eFederativa = (String) ComboEFederativa.getSelectedItem();
         Date fecha5 = DateExpedicion.getDate();
@@ -728,80 +858,74 @@ public class Carreras extends javax.swing.JFrame {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT clave_autorizacion FROM AutorizacionReconocimiento where autorizacion_reconocimiento='" + autorizacion_reconocimiento + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT ID_AUTORIZACION_RECONOCIMIENTO FROM autorizacionRec where AUTORIZACIÓN_RECONOCIMIENTO='" + autorizacion_reconocimiento + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                clave_autorizacion = resultadoConsulta.getInt("clave_autorizacion");
+                clave_autorizacion = resultadoConsulta.getInt("ID_AUTORIZACION_RECONOCIMIENTO");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT ID_MODALIDAD_TITULACIÓN FROM modalidadTitulacion where MODALIDAD_TITULACIÓN='" + modalidadTitulacion + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT CLAVE FROM modalidadTitulacion where MODALIDAD_TITULACIÓN='" + modalidadTitulacion + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                idModalidadTitulacion = resultadoConsulta.getInt("ID_MODALIDAD_TITULACIÓN");
+                idModalidadTitulacion = resultadoConsulta.getInt("CLAVE");
+                if(idModalidadTitulacion == 6){
+                modalidadTitulacion = "OTRO";   
+                }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT ID_FUNDAMENTO_LEGAL_SERVICIO_SOCIAL FROM fundamentoSSocial where FUNDAMENTO_LEGAL_SERVICIO_SOCIAL='" + fundamentoSS + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
                 idFundamentoLegalServicioSocial = resultadoConsulta.getInt("ID_FUNDAMENTO_LEGAL_SERVICIO_SOCIAL");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                idEntidadFederativa1 = resultadoConsulta.getInt("id_EntidadF");
+                if(resultadoConsulta.getInt("id_EntidadF") < 10){
+                idEntidadFederativa1 =  "0" + resultadoConsulta.getInt("id_EntidadF");   
+                } else {
+                idEntidadFederativa1 = resultadoConsulta.getString("id_EntidadF");
+                }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente='" + tipodeEstudio + "'");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
                 idTipoEstudioAntecedente = resultadoConsulta.getInt("idTipoAntecedente");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa2 + "'");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            while (resultadoConsulta.next()) {
-                idEntidadFederativa2 = resultadoConsulta.getInt("id_EntidadF");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Titulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -819,15 +943,17 @@ public class Carreras extends javax.swing.JFrame {
 
         try {
             String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
-            String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|Director|LIC.|BEVJ691029HGTRDR09|3|Rector|ING."
+            contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                     + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaComoCadena + "|"
                     + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "||" + CURP + "|"
                     + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                     + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                     + fundamentoSS + "|" + idEntidadFederativa1 + "|" + eFederativa + "|"
                     + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
-                    + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaComoCadena + "|" + fechaComoCadena2 + "|||";
+                    + idEntidadFederativa1 + "|" + eFederativa + "|" + fechaComoCadena + "|" + fechaComoCadena2 + "|||";
+
             System.out.println(contenido);
+
             File file = new File(ruta);
             // Si el archivo no existe es creado
             if (!file.exists()) {
@@ -841,12 +967,12 @@ public class Carreras extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboClave;
     private javax.swing.JComboBox<String> ComboEFederativa;
-    private javax.swing.JComboBox<String> ComboEFederativa2;
     private javax.swing.JComboBox<String> ComboFLegal;
     private javax.swing.JComboBox<String> ComboModalidadT;
     private javax.swing.JComboBox<String> ComboReconocimiento;
@@ -858,8 +984,8 @@ public class Carreras extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser DateFechaInicioE;
     private com.toedter.calendar.JDateChooser DateFechaTermino;
     private com.toedter.calendar.JDateChooser DateFechaTerminoE;
+    private javax.swing.JButton btnGenerar;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -896,7 +1022,6 @@ public class Carreras extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtCURP;
-    private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtFolio;
     private javax.swing.JTextField txtMatricula;

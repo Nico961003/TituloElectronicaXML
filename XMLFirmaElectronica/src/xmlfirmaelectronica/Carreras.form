@@ -72,12 +72,11 @@
                                       <Component id="jLabel21" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel24" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jLabel25" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
                                   <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ComboEFederativa2" min="-2" pref="275" max="-2" attributes="0"/>
                                   <Component id="ComboSSocial" min="-2" pref="275" max="-2" attributes="0"/>
                                   <Component id="ComboModalidadT" min="-2" pref="275" max="-2" attributes="0"/>
                                   <Component id="DateExpedicion" min="-2" pref="179" max="-2" attributes="0"/>
@@ -87,7 +86,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="261" max="32767" attributes="0"/>
+                      <EmptySpace pref="285" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -104,6 +103,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="DateExamenP" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                                   <Component id="DateExpedicion" min="-2" max="-2" attributes="0"/>
@@ -113,12 +116,13 @@
                                   <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="ComboModalidadT" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="DateExamenP" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ComboSSocial" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -128,12 +132,7 @@
                           <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboFLegal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ComboEFederativa2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="158" max="32767" attributes="0"/>
+                      <EmptySpace pref="179" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -199,22 +198,7 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="DateExamenP">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel25">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Entidad Federativa"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JComboBox" name="ComboFLegal">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="ComboEFederativa2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -230,6 +214,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFolio">
+              <Events>
+                <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="txtFolioMouseMoved"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel25">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="o fecha de excenci&#xf3;n"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -339,7 +331,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="42" max="32767" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -550,6 +542,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
+          <Events>
+            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jPanel3MouseMoved"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Carrera">
@@ -585,19 +580,19 @@
                                   <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtNombreCarrera" alignment="0" pref="222" max="32767" attributes="0"/>
-                                  <Component id="txtClave" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtNombreCarrera" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
                                   <Component id="DateFechaInicio" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
                                   <Component id="DateFechaTermino" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="ComboClave" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="390" max="32767" attributes="0"/>
+                      <EmptySpace pref="414" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton41" min="-2" pref="143" max="-2" attributes="0"/>
+                      <Component id="btnGenerar" min="-2" pref="143" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -616,8 +611,8 @@
                                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtClave" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ComboClave" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
@@ -641,7 +636,7 @@
                           <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="195" max="32767" attributes="0"/>
-                      <Component id="jButton41" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGenerar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -660,11 +655,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Clave de Carrera"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtClave">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtClaveActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -707,13 +697,24 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="DateFechaTermino">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton41">
+            <Component class="javax.swing.JButton" name="btnGenerar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Generar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton41ActionPerformed"/>
+                <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="btnGenerarMouseMoved"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="ComboClave">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
