@@ -415,6 +415,7 @@ public class MECSignerClient extends JFrame implements ActionListener {
                     
         temporal tm = new temporal();
         String Recepcion = tm.getTexto();
+        String Matricula = tm.getMatricula();
         String[] xml = new String[45];
         int i = 1;
         StringTokenizer st = new StringTokenizer(Recepcion, "|");
@@ -426,7 +427,7 @@ public class MECSignerClient extends JFrame implements ActionListener {
         }
 
         try {
-            String ruta = "/home/genaro/Documentos/TituloElectronico_" + xml[2] + ".xml";
+            String ruta = "/home/genaro/Documentos/TituloElectronico_" + Matricula + ".xml";
             String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl="+xml[2]+" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                     + "  <FirmaResponsables>\n"

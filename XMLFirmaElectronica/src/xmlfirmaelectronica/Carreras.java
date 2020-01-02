@@ -61,7 +61,7 @@ public class Carreras extends javax.swing.JFrame {
     String fechaComoCadena = "", institucionProcedencia = "";
     String fechaComoCadena2 = "", tipodeEstudio = "", eFederativa = "";
     int idModalidadTitulacion = 0, idFundamentoLegalServicioSocial = 0;
-    String idEntidadFederativa1 = "", noCedula= "", noRvoe= "";
+    String idEntidadFederativa1 = "", noCedula = "", noRvoe = "";
 
     /**
      * *****************************************
@@ -76,9 +76,9 @@ public class Carreras extends javax.swing.JFrame {
     public Carreras() {
         initComponents();
         this.setLocationRelativeTo(null);
-   
+
         txtNombreCarrera.setEnabled(false);
-        
+
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM autorizacionRec");//establecimiento de sentencia aejecutar
@@ -148,7 +148,7 @@ public class Carreras extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM Carreras");//establecimiento de sentencia aejecutar
@@ -162,43 +162,42 @@ public class Carreras extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
         txtFolio.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
-                
+
                 // Verificar si la tecla pulsada no es un digito
-                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                     e.consume();  // ignorar el evento de teclado
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
-                } 
+                }
             }
         });
-        
+
         txtMatricula.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
-                
+
                 // Verificar si la tecla pulsada no es un digito
-                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                     e.consume();  // ignorar el evento de teclado
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
-                } 
+                }
             }
-        });   
-        
+        });
+
         txtNoCedula.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
-                
+
                 // Verificar si la tecla pulsada no es un digito
-                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                     e.consume();  // ignorar el evento de teclado
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
-                } 
+                }
             }
-        });  
+        });
 
     }
 
@@ -696,13 +695,6 @@ public class Carreras extends javax.swing.JFrame {
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         capturarDatos();
         regitroBaseDatos();
-        abrirarchivo("/home/genaro/Documentos/");
-        temporal tm = new temporal();
-        System.out.println("prueba de envio : " + contenido);
-        tm.setTexto(contenido.trim());
-        final MECSignerClient client = new MECSignerClient();
-        client.setVisible(true);
-        dispose();
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void txtFolioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFolioMouseMoved
@@ -710,16 +702,16 @@ public class Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFolioMouseMoved
 
     private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
-            // Patrón para validar el email
+        // Patrón para validar el email
         Pattern pattern = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
- 
+
         // El email a validar
         String email = txtCorreo.getText();
- 
+
         Matcher mather = pattern.matcher(email);
- 
+
         if (mather.find() == true) {
             btnGenerar.setEnabled(true);
         } else {
@@ -727,30 +719,30 @@ public class Carreras extends javax.swing.JFrame {
             txtCorreo.setText("");
             btnGenerar.setEnabled(false);
         }
-        
-        if(DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null
-        || txtMatricula.getText() == "" || txtNombre.getText() == "" || txtaPaterno.getText() == "" || txtaMaterno.getText() == ""
-        || txtCURP.getText() == "" || txtCorreo.getText() == "" || txtFolio.getText() == "" || DateExpedicion.getDate() == null
-        || txtProcedencia.getText() == "" || DateExpedicion.getDate() == null || txtNoCedula.getText() == ""){
-          
+
+        if (DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null
+                || txtMatricula.getText() == "" || txtNombre.getText() == "" || txtaPaterno.getText() == "" || txtaMaterno.getText() == ""
+                || txtCURP.getText() == "" || txtCorreo.getText() == "" || txtFolio.getText() == "" || DateExpedicion.getDate() == null
+                || txtProcedencia.getText() == "" || DateExpedicion.getDate() == null || txtNoCedula.getText() == "") {
+
             JOptionPane.showMessageDialog(null, "Tiene que llenar todos los datos para poder continuar\nFinalice y vuelva a intentar");
             btnGenerar.setEnabled(false);
-            
+
         }
-        
-        
+
+
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-    try {
+        try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM Carreras where idCarrera='" + (String) ComboClave.getSelectedItem() + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                txtNombreCarrera.setText(resultadoConsulta.getString("Carrera")); 
-                noRvoe = resultadoConsulta.getString("noRvoe"); 
+                txtNombreCarrera.setText(resultadoConsulta.getString("Carrera"));
+                noRvoe = resultadoConsulta.getString("noRvoe");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
@@ -901,8 +893,8 @@ public class Carreras extends javax.swing.JFrame {
             }
             while (resultadoConsulta.next()) {
                 idModalidadTitulacion = resultadoConsulta.getInt("CLAVE");
-                if(idModalidadTitulacion == 6){
-                modalidadTitulacion = "OTRO";   
+                if (idModalidadTitulacion == 6) {
+                    modalidadTitulacion = "OTRO";
                 }
             }
         } catch (SQLException ex) {
@@ -929,10 +921,10 @@ public class Carreras extends javax.swing.JFrame {
                 Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                if(resultadoConsulta.getInt("id_EntidadF") < 10){
-                idEntidadFederativa1 =  "0" + resultadoConsulta.getInt("id_EntidadF");   
+                if (resultadoConsulta.getInt("id_EntidadF") < 10) {
+                    idEntidadFederativa1 = "0" + resultadoConsulta.getInt("id_EntidadF");
                 } else {
-                idEntidadFederativa1 = resultadoConsulta.getString("id_EntidadF");
+                    idEntidadFederativa1 = resultadoConsulta.getString("id_EntidadF");
                 }
             }
         } catch (SQLException ex) {
@@ -969,7 +961,7 @@ public class Carreras extends javax.swing.JFrame {
             String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
             contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                     + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaComoCadena + "|"
-                    + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento +  "|" + noRvoe + "||" + CURP + "|"
+                    + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "||" + CURP + "|"
                     + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                     + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                     + fundamentoSS + "|" + idEntidadFederativa1 + "|" + eFederativa + "|"
@@ -982,17 +974,45 @@ public class Carreras extends javax.swing.JFrame {
             // Si el archivo no existe es creado
             if (!file.exists()) {
                 file.createNewFile();
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(contenido);
+                bw.close();
+                JOptionPane.showMessageDialog(null, "txt Generado en la ruta : " + ruta);
+                abrirarchivo("/home/genaro/Documentos/");
+                temporal tm = new temporal();
+                tm.setTexto(contenido.trim());
+                tm.setMatricula(matricula.trim());
+                final MECSignerClient client = new MECSignerClient();
+                client.setVisible(true);
+                dispose();
+            } else if (file.exists()) {
+                int reply = JOptionPane.showConfirmDialog(null, "El archivo ya existe\n desea sobrescribir?", "TituloElectronico_" + matricula + ".txt", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    FileWriter fw = new FileWriter(file);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(contenido);
+                    bw.close();
+                    JOptionPane.showMessageDialog(null, "txt Generado en la ruta : " + ruta);
+                    abrirarchivo("/home/genaro/Documentos/");
+                    temporal tm = new temporal();
+                    tm.setTexto(contenido.trim());
+                    tm.setMatricula(matricula.trim());
+                    final MECSignerClient client = new MECSignerClient();
+                    client.setVisible(true);
+                    dispose();
+                } else if (reply == JOptionPane.NO_OPTION) {
+                    //System.exit(0);
+                    jTabbedPane1.setSelectedComponent(jPanel5);
+                    txtMatricula.requestFocus();
+                }
             }
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(contenido);
-            bw.close();
-            JOptionPane.showMessageDialog(null, "txt Generado en la ruta : " + ruta);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboClave;
