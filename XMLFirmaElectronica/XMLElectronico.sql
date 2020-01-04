@@ -1,83 +1,39 @@
-   create database tituloProfesional;
-   use tituloProfesional
-   
-   
-create table FirmaResponsable(
-idFirma                    int primary key not null auto_increment,
-nombre                     varchar(50),
-primerApellido             varchar(50),
-segundoApellido            varchar(50),
-curp                       varchar(50),  
-idCargo                    int,
-cargo                      varchar(50),
-abrTitulo                  varchar(50),
-sello                      varchar(200),
-certificadoResponsable     varchar(300),
-noCertificadoResponsable   varchar(50)
+create database tituloProfesional
+use tituloProfesional
+
+
+create table autorizacionRec(
+ID_AUTORIZACION_RECONOCIMIENTO	int(11) primary key not null ,
+AUTORIZACIÓN_RECONOCIMIENTO	text
+)IdCarreraIdCarreraentidadfederativamodalidadtitulacionmodalidadtitulacionIdCarrera
+insert into autorizacionRec values('1', 'RVOE FEDERAL');
+insert into autorizacionRec values('2', 'RVOE ESTATAL');
+insert into autorizacionRec values('3', 'AUTORIZACIÓN FEDERAL');
+insert into autorizacionRec values('4', 'AUTORIZACIÓN ESTATAL');
+insert into autorizacionRec values('5', 'ACTA DE SESIÓN');
+insert into autorizacionRec values('6', 'ACUERDO DE INCORPORACIÓN');
+insert into autorizacionRec values('7', 'ACUERDO SECRETARIAL SEP');
+insert into autorizacionRec values('8', 'DECRETO DE CREACIÓN');
+insert into autorizacionRec values('9', 'OTRO');
+
+
+
+
+
+create table modalidadTitulacion(
+ID_MODALIDAD_TITULACIÓN	int(11) primary key not null,
+CLAVE	int(11),
+MODALIDAD_TITULACIÓN	text,
+TIPO_DE_MODALIDAD	text
 )
- 
- 
- create table Institucion(
- cveInstitucion        varchar(50), 
- nombreInstitucion     varchar(50)
- )
- 
- 
-   
-   create table Carrera(
-   cveCarrera 						int not null,
-   nombreCarrera 					varchar(50), 
-   fechaInicio                      date,
-   fechaTerminacion     			date,
-   idAutorizacionReconocimiento     int,
-   autorizacion_reconocimiento 		varchar(50)
-   )  
-   
-   
-   create table Profesionista(
-   curp					varchar(50),
-   nombre				varchar(50),
-   primerApellido 		varchar(50),
-   segundoApellido		varchar(50),
-   correoElectronico    varchar(50)
-   )
+insert into modalidadTitulacion values('1', '1', 'POR TESIS', 'ACTA DE EXAMEN');
+insert into modalidadTitulacion values('2', '2', 'POR PROMEDIO', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('3', '3', 'POR ESTUDIOS DE POSGRADOS', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('4', '4', 'POR EXPERIENCIA LABORAL', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('5', '5', 'POR CENEVAL', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('6', '6', 'OTRO', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('7', '6', 'SEMINARIO DE TITULACIÓN', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('8', '6', 'EXAMEN DE CONOCIMIENTOS GENERALES DE LA LICENCIATURA', 'CONSTANCIA DE EXENCIÓN');
+insert into modalidadTitulacion values('9', '6', 'REPORTE GLOBAL DE SERVICIO SOCIAL', 'CONSTANCIA DE EXENCIÓN');
 
-   create table Expedicion(
-   fechaExpedicion						date,
-   idModalidadTitulacion				int, 
-   modalidadTitulacion					varchar(50),
-   fechaExamenProfesional 				varchar(50),
-   cumplioServicioSocial				varchar(50),
-   idFundamentoLegalServicioSocial		int,
-   fundamentoLegalServicioSocial		varchar(50),
-   idEntidadFederativa					int,
-   entidadFederativa					varchar(50)
-   )
-
-   
-   CREATE TABLE antecedentesEstudiante(
-   id_antecedenteE     int primary key not null auto_increment,
-   instProcedencia     varchar(50),
-   tipoEstAntecedente  varchar(50),
-   entidadFederativa   varchar(100),
-   fechaInicio         date,
-   fechaTermino        date
-   )
-   
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
+select * from Carreras

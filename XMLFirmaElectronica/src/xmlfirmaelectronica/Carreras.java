@@ -75,10 +75,8 @@ public class Carreras extends javax.swing.JFrame {
 
     public Carreras() {
         initComponents();
-        this.setLocationRelativeTo(null);
-
-        txtNombreCarrera.setEnabled(false);
-
+       
+         
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM autorizacionRec");//establecimiento de sentencia aejecutar
@@ -148,7 +146,7 @@ public class Carreras extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM Carreras");//establecimiento de sentencia aejecutar
@@ -157,47 +155,48 @@ public class Carreras extends javax.swing.JFrame {
             }
 
             while (resultadoConsulta.next()) {
-                ComboClave.addItem(resultadoConsulta.getString("IdCarrera"));
+                ComboCarrera.addItem(resultadoConsulta.getString("Carrera"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
         txtFolio.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
-
+                
                 // Verificar si la tecla pulsada no es un digito
-                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                     e.consume();  // ignorar el evento de teclado
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
-                }
+                } 
             }
         });
-
+        
         txtMatricula.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
-
+                
                 // Verificar si la tecla pulsada no es un digito
-                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                     e.consume();  // ignorar el evento de teclado
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
-                }
+                } 
             }
-        });
-
+        });   
+        
         txtNoCedula.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
-
+                
                 // Verificar si la tecla pulsada no es un digito
-                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                     e.consume();  // ignorar el evento de teclado
                     JOptionPane.showMessageDialog(null, "Unicamente numeros");
-                }
+                } 
             }
-        });
+        });  
 
     }
 
@@ -217,15 +216,15 @@ public class Carreras extends javax.swing.JFrame {
         ComboSSocial = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        DateExpedicion = new com.toedter.calendar.JDateChooser();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         ComboModalidadT = new javax.swing.JComboBox<>();
-        DateExamenP = new com.toedter.calendar.JDateChooser();
         ComboFLegal = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
         txtFolio = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
+        DateExamenP = new com.toedter.calendar.JDateChooser();
+        DateExpedicion = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -252,25 +251,23 @@ public class Carreras extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
-        DateFechaInicioE = new com.toedter.calendar.JDateChooser();
         jLabel19 = new javax.swing.JLabel();
-        DateFechaTerminoE = new com.toedter.calendar.JDateChooser();
         jLabel28 = new javax.swing.JLabel();
         txtNoCedula = new javax.swing.JTextField();
+        DateFechaInicioE = new com.toedter.calendar.JDateChooser();
+        DateFechaTerminoE = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         ComboReconocimiento = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
+        btnGenerar = new javax.swing.JButton();
         DateFechaInicio = new com.toedter.calendar.JDateChooser();
         DateFechaTermino = new com.toedter.calendar.JDateChooser();
-        btnGenerar = new javax.swing.JButton();
-        ComboClave = new javax.swing.JComboBox<>();
-        txtNombreCarrera = new javax.swing.JTextField();
+        ComboCarrera = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -323,11 +320,11 @@ public class Carreras extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboModalidadT, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(288, Short.MAX_VALUE))
+                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,26 +333,24 @@ public class Carreras extends javax.swing.JFrame {
                 .addComponent(jLabel38)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel26)
-                    .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel20)
-                            .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel22)
-                            .addComponent(ComboModalidadT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25)
-                        .addGap(18, 18, 18)))
+                            .addComponent(jLabel26)
+                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel20))
+                    .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(ComboModalidadT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23)
+                    .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel25)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
@@ -363,7 +358,7 @@ public class Carreras extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Expedición", jPanel2);
@@ -446,10 +441,10 @@ public class Carreras extends javax.swing.JFrame {
                                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGap(150, 150, 150)
                                                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(DateFechaInicioE, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtNoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(txtNoCedula, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))))))
+                                                    .addComponent(DateFechaInicioE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                                    .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel18)
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,9 +535,9 @@ public class Carreras extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(DateFechaInicioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel28)
@@ -551,6 +546,7 @@ public class Carreras extends javax.swing.JFrame {
                             .addComponent(jButton4)
                             .addComponent(jButton5)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
                         .addComponent(DateFechaTerminoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -559,16 +555,8 @@ public class Carreras extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Estudiante", jPanel5);
 
-        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jPanel3MouseMoved(evt);
-            }
-        });
-
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel35.setText("Carrera ");
-
-        jLabel1.setText("Clave de Carrera");
 
         jLabel2.setText("Nombre de Carrera");
 
@@ -607,21 +595,20 @@ public class Carreras extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel14)
                             .addComponent(jLabel13))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ComboCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(DateFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(DateFechaTermino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel17)
                         .addGap(13, 13, 13)
                         .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -633,32 +620,28 @@ public class Carreras extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel35)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(39, 39, 39))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(ComboClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(DateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel13))
-                    .addComponent(DateFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(41, 41, 41)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(btnGenerar)
+                    .addComponent(jLabel2)
+                    .addComponent(ComboCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(DateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                        .addComponent(btnGenerar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(DateFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -734,19 +717,7 @@ public class Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT * FROM Carreras where idCarrera='" + (String) ComboClave.getSelectedItem() + "'");//establecimiento de sentencia aejecutar
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            while (resultadoConsulta.next()) {
-                txtNombreCarrera.setText(resultadoConsulta.getString("Carrera"));
-                noRvoe = resultadoConsulta.getString("noRvoe");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_jPanel3MouseMoved
     public void sacartexto() {
         System.out.println("Envio");
@@ -806,9 +777,7 @@ public class Carreras extends javax.swing.JFrame {
     }
 
     public void datosResponsables() {
-        clave = (String) ComboClave.getSelectedItem();
-        nombreCarrera = txtNombreCarrera.getText();
-        nombreCarrera = nombreCarrera.toUpperCase();
+        nombreCarrera = (String) ComboCarrera.getSelectedItem();
         autorizacion_reconocimiento = (String) ComboReconocimiento.getSelectedItem();
         Date fecha1 = DateFechaInicio.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -817,7 +786,7 @@ public class Carreras extends javax.swing.JFrame {
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         fechaComoCadena2 = sdf2.format(fecha2);
     }
-
+    
     public void datosAlumno() {
         matricula = txtMatricula.getText();
         nombre = txtNombre.getText();
@@ -893,8 +862,8 @@ public class Carreras extends javax.swing.JFrame {
             }
             while (resultadoConsulta.next()) {
                 idModalidadTitulacion = resultadoConsulta.getInt("CLAVE");
-                if (idModalidadTitulacion == 6) {
-                    modalidadTitulacion = "OTRO";
+                if(idModalidadTitulacion == 6){
+                modalidadTitulacion = "OTRO";   
                 }
             }
         } catch (SQLException ex) {
@@ -921,10 +890,10 @@ public class Carreras extends javax.swing.JFrame {
                 Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                if (resultadoConsulta.getInt("id_EntidadF") < 10) {
-                    idEntidadFederativa1 = "0" + resultadoConsulta.getInt("id_EntidadF");
+                if(resultadoConsulta.getInt("id_EntidadF") < 10){
+                idEntidadFederativa1 =  "0" + resultadoConsulta.getInt("id_EntidadF");   
                 } else {
-                    idEntidadFederativa1 = resultadoConsulta.getString("id_EntidadF");
+                idEntidadFederativa1 = resultadoConsulta.getString("id_EntidadF");
                 }
             }
         } catch (SQLException ex) {
@@ -939,6 +908,20 @@ public class Carreras extends javax.swing.JFrame {
             }
             while (resultadoConsulta.next()) {
                 idTipoEstudioAntecedente = resultadoConsulta.getInt("idTipoAntecedente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT * FROM Carreras where Carrera='" + nombreCarrera + "'");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                clave = resultadoConsulta.getString("idCarrera");
+                noRvoe = resultadoConsulta.getString("noRvoe");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Carreras.class.getName()).log(Level.SEVERE, null, ex);
@@ -958,10 +941,10 @@ public class Carreras extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");*/
 
         try {
-            String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
+            String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
             contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                     + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaComoCadena + "|"
-                    + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "||" + CURP + "|"
+                    + fechaComoCadena2 + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento +  "|" + noRvoe + "||" + CURP + "|"
                     + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                     + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                     + fundamentoSS + "|" + idEntidadFederativa1 + "|" + eFederativa + "|"
@@ -1015,7 +998,7 @@ public class Carreras extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboClave;
+    private javax.swing.JComboBox<String> ComboCarrera;
     private javax.swing.JComboBox<String> ComboEFederativa;
     private javax.swing.JComboBox<String> ComboFLegal;
     private javax.swing.JComboBox<String> ComboModalidadT;
@@ -1031,7 +1014,6 @@ public class Carreras extends javax.swing.JFrame {
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1072,7 +1054,6 @@ public class Carreras extends javax.swing.JFrame {
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNoCedula;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombreCarrera;
     private javax.swing.JTextField txtProcedencia;
     private javax.swing.JTextField txtaMaterno;
     private javax.swing.JTextField txtaPaterno;
